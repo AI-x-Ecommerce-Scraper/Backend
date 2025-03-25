@@ -294,7 +294,10 @@ export const getAllScrapedProducts = async (
     const totalProducts = await Scraped.countDocuments();
     const totalPages = Math.ceil(totalProducts / limit);
 
-    const scrapedProducts = await Scraped.find().skip(skip).limit(limit);
+    const scrapedProducts = await Scraped.find()
+      .skip(skip)
+      .limit(limit)
+      .select("name _id");
 
     res.status(200).json({
       success: true,
